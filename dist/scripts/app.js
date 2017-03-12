@@ -19,14 +19,7 @@
             .state('album', {
                 url: '/album',
                 templateUrl: '/templates/album.html'
-<<<<<<< HEAD
             })
-            .state('collection', {
-                url: '/collection',
-                templateUrl: '/templates/collection.html'
-=======
->>>>>>> angular-controllers
-            });
     };
 
     angular
