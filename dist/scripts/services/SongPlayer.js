@@ -103,7 +103,12 @@
                 playSong(song);
             }
         };
-        
+
+/**
+* @function 
+* @desc Plays next song 
+* @param {Object} song
+*/        
         SongPlayer.next = function() {
             var currentSongIndex = getSongIndex(SongPlayer.currentSong);
             currentSongIndex++;
