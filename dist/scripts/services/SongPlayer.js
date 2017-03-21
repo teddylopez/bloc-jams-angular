@@ -36,58 +36,17 @@
             });
             SongPlayer.currentSong = song;
         };
-        
-        var getSongIndex = function(song) {
-        return currentAlbum.songs.indexOf(song);
-        };
-        
-/**
-* @function setVolume
-* @desc Sets a song's volume level
-* @param {Object} song
-*/
-        SongPlayer.setVolume = function(volume) {
-            if (currentBuzzObject) {
-                currentBuzzObject.setVolume(volume);
-            }
-            SongPlayer.volume = volume;
-        };
-        
-/**
-* @desc Active song object from list of songs
-* @type {Object}
-*/
 
-        SongPlayer.currentSong = null;
-        
-/**
- * @desc Current playback time (in seconds) of currently playing song
- * @type {Number}
- */
-        SongPlayer.currentTime = null;
-
- /**
- * @function setCurrentTime
- * @desc Set current time (in seconds) of currently playing song
- * @param {Number} time
- */
-        SongPlayer.setCurrentTime = function(time) {
-            if (currentBuzzObject) {
-                currentBuzzObject.setTime(time);
-            }
-        };
-        
 /**
 * @function playSong
 * @desc Starts a song 
 * @param {Object} song
-*/
-        
+*/        
         var playSong = function(song) {
             currentBuzzObject.play();
             song.playing = true;
         };
-        
+
 /**
 * @function stopSong
 * @desc Stop a song
@@ -97,6 +56,34 @@
             currentBuzzObject.stop();
             song.playing = null;
         };
+
+/**
+* @function getSongIndex
+* @desc Get index of song in the songs array
+* @param {Object} song
+* @returns {Number}
+*/
+        var getSongIndex = function(song) {
+            return currentAlbum.songs.indexOf(song);
+        };
+
+/**
+* @desc Active song object from list of songs
+* @type {Object}
+*/
+        SongPlayer.currentSong = null;
+
+/**
+ * @desc Current playback time (in seconds) of currently playing song
+ * @type {Number}
+ */
+        SongPlayer.currentTime = null;
+        
+/* @desc Volume used for songs
+* @type {Number}
+*/
+        SongPlayer.volume = 80;
+        
  
 /**
 * @function used in ng-click
@@ -105,8 +92,8 @@
         SongPlayer.play = function(song) {
             song = song || SongPlayer.currentSong;
             if(SongPlayer.currentSong !== song) {
-            setSong(song);
-            playSong(song);
+                setSong(song);
+                playSong(song);
             } else if (SongPlayer.currentSong === song) {
                 if (currentBuzzObject.isPaused()) {
                     currentBuzzObject.play();
@@ -114,6 +101,10 @@
             }
         };
         
+/**
+* @function used in ng-click
+* @desc pauses song
+*/
         SongPlayer.pause = function(song) {
             song = song || SongPlayer.currentSong;
             currentBuzzObject.pause();
@@ -157,9 +148,32 @@
                 playSong(song);
             }
         };
+/**
+* @function setCurrentTime
+* @desc Set current time (in seconds) of currently playing song
+* @param {Number} time
+*/
+        SongPlayer.setCurrentTime = function(time) {
+            console.log(time);
+            if (currentBuzzObject) {
+                currentBuzzObject.setTime(time);
+            }
+        };
+        
+/**
+* @function setVolume
+* @desc Sets a song's volume level
+* @param {Object} song
+*/       
+        SongPlayer.setVolume = function(volume) {
+            if (currentBuzzObject) {
+                currentBuzzObject.setVolume(volume);
+            }
+            SongPlayer.volume = volume;
+        };
         
         return SongPlayer;
-    }
+    };
  
     angular
         .module('blocJams')
